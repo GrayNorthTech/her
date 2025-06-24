@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Surprise for My Love</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles and animations */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FFF5F7; /* Soft pink background */
+        }
+        .font-pacifico {
+            font-family: 'Pacifico', cursive;
+        }
+        .heartbeat {
+            animation: heartbeat 1.5s ease-in-out infinite both;
+        }
+        @keyframes heartbeat {
+            from {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+        .fade-in {
+            animation: fadeIn 2s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .surprise-button {
+            background: linear-gradient(45deg, #FF69B4, #FFC0CB);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.4);
+        }
+        .surprise-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(255, 105, 180, 0.6);
+        }
+        /* Confetti styles */
+        .confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 9999;
+        }
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            opacity: 0.7;
+            animation: fall 5s linear infinite;
+        }
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <div id="confetti-container" class="confetti-container"></div>
+
+    <div class="container mx-auto px-4 py-8 md:py-16 text-center">
+
+        <!-- Header Section -->
+        <header class="fade-in">
+            <h1 class="font-pacifico text-4xl md:text-6xl text-pink-500 mb-4">To My Wonderful Girlfriend</h1>
+            <p id="header-subtitle" class="text-lg md:text-2xl text-gray-600">A little reminder of our journey together.</p>
+            <div class="heartbeat inline-block text-5xl text-red-500 my-6">❤️</div>
+        </header>
+
+        <!-- Our Journey Section -->
+        <section class="mt-12 fade-in" style="animation-delay: 0.5s;">
+            <div class="card p-6 md:p-8 max-w-2xl mx-auto">
+                <h2 class="font-pacifico text-3xl text-pink-500 mb-4">Our Journey</h2>
+                <p class="text-lg">Since <strong id="anniversary-date">November 29, 2024</strong></p>
+                <div class="flex justify-center items-center space-x-4 md:space-x-8 text-xl md:text-2xl mt-6">
+                    <div>
+                        <p id="days-count" class="font-bold text-pink-500 text-4xl">0</p>
+                        <p class="text-gray-500">Days Together</p>
+                    </div>
+                    <div>
+                        <p id="love-level" class="font-bold text-pink-500 text-4xl">∞</p>
+                        <p class="text-gray-500">Love & Laughter</p>
+                    </div>
+                </div>
+                 <p class="mt-6 text-gray-600">Every single day with you has been a gift.</p>
+            </div>
+        </section>
+
+        <!-- Countdown Section -->
+        <section class="mt-12 fade-in" style="animation-delay: 1s;">
+            <div class="card p-6 md:p-8 max-w-2xl mx-auto">
+                <h2 class="font-pacifico text-3xl text-pink-500 mb-4">Our Next Chapter</h2>
+                <p class="text-lg text-gray-600">Countdown to our next anniversary!</p>
+                <div id="countdown" class="flex justify-center space-x-2 md:space-x-4 text-center mt-6 text-lg md:text-xl">
+                    <div class="bg-pink-100 p-3 rounded-lg w-20">
+                        <div id="countdown-days" class="font-bold text-3xl text-pink-600">0</div>
+                        <div>Days</div>
+                    </div>
+                    <div class="bg-pink-100 p-3 rounded-lg w-20">
+                        <div id="countdown-hours" class="font-bold text-3xl text-pink-600">0</div>
+                        <div>Hours</div>
+                    </div>
+                    <div class="bg-pink-100 p-3 rounded-lg w-20">
+                        <div id="countdown-minutes" class="font-bold text-3xl text-pink-600">0</div>
+                        <div>Mins</div>
+                    </div>
+                    <div class="bg-pink-100 p-3 rounded-lg w-20">
+                        <div id="countdown-seconds" class="font-bold text-3xl text-pink-600">0</div>
+                        <div>Secs</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Surprise Message Section -->
+        <section class="mt-12 fade-in" style="animation-delay: 1.5s;">
+             <button id="surprise-button" class="surprise-button text-white font-bold py-4 px-8 rounded-full text-xl">
+                Click for a Surprise!
+            </button>
+            <div id="surprise-message-box" class="hidden mt-6 max-w-2xl mx-auto">
+                <div class="card p-8">
+                    <h3 class="font-pacifico text-3xl text-pink-500 mb-4">My Dearest Love,</h3>
+                    <p class="text-lg text-gray-700 leading-relaxed">
+                        I made this little website just for you. It's a small way to show you how much you mean to me. Every moment with you is my favorite moment. You make my world brighter and my heart fuller. Thank you for being you.
+                        <br><br>
+                        With all my love,
+                        <br>
+                        <span class="font-pacifico text-2xl text-pink-500">Your Name</span>
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+    </div>
+
+    <script>
+        // --- CONFIGURATION ---
+        // IMPORTANT: Change these values to personalize the website!
+        const yourName = "Your Husband"; // Change to your name
+        const gfName = "My favorite person"; // Change to your girlfriend's name
+        const anniversaryString = "2024-11-29T00:00:00"; // IMPORTANT: The date you started your relationship
+
+        // --- DYNAMIC CONTENT SETUP ---
+        document.getElementById('header-subtitle').innerText = `A little surprise for ${gfName}.`;
+        document.querySelector('#surprise-message-box span').innerText = yourName;
+
+        // --- ANNIVERSARY & DAYS TOGETHER COUNTER ---
+        // Note: The date you provided, 11/29/24, is in the future. 
+        // If your relationship started last year, you might want to change the year to 2023.
+        // For now, it will calculate days from the future date you provided.
+        const anniversaryDate = new Date(anniversaryString);
+        const today = new Date();
+
+        document.getElementById('anniversary-date').innerText = anniversaryDate.toLocaleDateString('en-US', {
+            year: 'numeric', month: 'long', day: 'numeric'
+        });
+
+        // Calculate the difference in time
+        const timeDiff = today.getTime() - anniversaryDate.getTime();
+        
+        // Calculate the difference in days
+        // If the date is in the future, it will be negative, so we show 0.
+        const daysTogether = Math.max(0, Math.floor(timeDiff / (1000 * 3600 * 24)));
+        const daysCountEl = document.getElementById('days-count');
+        
+        // Animate the number counting up
+        let currentDay = 0;
+        const countUpInterval = setInterval(() => {
+            if (currentDay >= daysTogether) {
+                clearInterval(countUpInterval);
+                daysCountEl.innerText = daysTogether;
+            } else {
+                currentDay += Math.ceil(daysTogether/100) > 0 ? Math.ceil(daysTogether/100) : 1;
+                if(currentDay > daysTogether) currentDay = daysTogether;
+                daysCountEl.innerText = currentDay;
+            }
+        }, 20);
+
+        // --- NEXT ANNIVERSARY COUNTDOWN ---
+        let nextAnniversary = new Date(anniversaryDate);
+        if (today > nextAnniversary) {
+            nextAnniversary.setFullYear(today.getFullYear() + 1);
+        }
+         // If today IS the anniversary, set it to next year.
+        if(today.getMonth() === nextAnniversary.getMonth() && today.getDate() === nextAnniversary.getDate()){
+             nextAnniversary.setFullYear(today.getFullYear() + 1);
+        }
+
+        const countdownInterval = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = nextAnniversary - now;
+
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                document.getElementById('countdown').innerHTML = "<div class='text-2xl text-pink-500 font-pacifico'>Happy Anniversary!</div>";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('countdown-days').innerText = days;
+            document.getElementById('countdown-hours').innerText = hours;
+            document.getElementById('countdown-minutes').innerText = minutes;
+            document.getElementById('countdown-seconds').innerText = seconds;
+        }, 1000);
+
+        // --- SURPRISE BUTTON & CONFETTI ---
+        const surpriseButton = document.getElementById('surprise-button');
+        const surpriseMessageBox = document.getElementById('surprise-message-box');
+        const confettiContainer = document.getElementById('confetti-container');
+
+        surpriseButton.addEventListener('click', () => {
+            surpriseMessageBox.classList.toggle('hidden');
+            if (!surpriseMessageBox.classList.contains('hidden')) {
+                launchConfetti();
+            }
+        });
+
+        function launchConfetti() {
+            for (let i = 0; i < 100; i++) {
+                createConfetti();
+            }
+        }
+
+        function createConfetti() {
+            const confetti = document.createElement('div');
+            confetti.classList.add('confetti');
+            const colors = ['#FF69B4', '#FFD700', '#ADFF2F', '#1E90FF', '#BA55D3'];
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.animationDuration = Math.random() * 3 + 2 + 's';
+            confetti.style.width = Math.random() * 5 + 5 + 'px';
+            confetti.style.height = confetti.style.width;
+
+            confettiContainer.appendChild(confetti);
+
+            setTimeout(() => {
+                confetti.remove();
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
