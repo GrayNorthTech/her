@@ -154,7 +154,7 @@
                 <div class="card p-8">
                     <h3 class="font-pacifico text-3xl text-pink-500 mb-4">My Dearest Love,</h3>
                     <p class="text-lg text-gray-700 leading-relaxed">
-                        I made this little website just for you. It's a small way to show you how much you mean to me. Every moment with you is my favorite moment. You make my world brighter and my heart fuller. Thank you for being with me.
+                        I made this little website just for you. It's a small way to show you how much you mean to me. Every moment with you is my favorite moment. You make my world brighter and my heart fuller. Thank you for being my everything!
                         <br><br>
                         With all my love,
                         <br>
@@ -170,15 +170,14 @@
         // --- CONFIGURATION ---
         // IMPORTANT: Change these values to personalize the website!
         const yourName = "Your Husband"; // Change to your name
-        const gfName = "My favorite person"; // Change to your girlfriend's name
-        const anniversaryString = "2024-11-29T00:00:00"; // IMPORTANT: The date you started your relationship
+        const gfName = "my favorite person"; // Change to your girlfriend's name
+        const anniversaryString = "2025-11-11T00:00:00"; // IMPORTANT: The date you started your relationship
 
         // --- DYNAMIC CONTENT SETUP ---
         document.getElementById('header-subtitle').innerText = `A little surprise for ${gfName}.`;
         document.querySelector('#surprise-message-box span').innerText = yourName;
 
         // --- ANNIVERSARY & DAYS TOGETHER COUNTER ---
-  
         const anniversaryDate = new Date(anniversaryString);
         const today = new Date();
 
@@ -201,25 +200,27 @@
                 clearInterval(countUpInterval);
                 daysCountEl.innerText = daysTogether;
             } else {
-                currentDay += Math.ceil(daysTogether/100) > 0 ? Math.ceil(daysTogether/100) : 1;
+                // Make the count-up faster for larger numbers
+                let increment = Math.ceil(daysTogether / 100);
+                if (increment < 1) increment = 1;
+                currentDay += increment;
                 if(currentDay > daysTogether) currentDay = daysTogether;
                 daysCountEl.innerText = currentDay;
             }
         }, 20);
 
         // --- NEXT ANNIVERSARY COUNTDOWN ---
-        let nextAnniversary = new Date(anniversaryDate);
-        if (today > nextAnniversary) {
-            nextAnniversary.setFullYear(today.getFullYear() + 1);
-        }
-         // If today IS the anniversary, set it to next year.
-        if(today.getMonth() === nextAnniversary.getMonth() && today.getDate() === nextAnniversary.getDate()){
-             nextAnniversary.setFullYear(today.getFullYear() + 1);
-        }
-
         const countdownInterval = setInterval(() => {
-            const now = new Date().getTime();
-            const distance = nextAnniversary - now;
+            const now = new Date();
+            let nextAnniversary = new Date(anniversaryDate);
+            nextAnniversary.setFullYear(now.getFullYear());
+
+            // If the anniversary for this year has already passed (or is today), set it to next year
+            if (now >= nextAnniversary) {
+                nextAnniversary.setFullYear(now.getFullYear() + 1);
+            }
+            
+            const distance = nextAnniversary - now.getTime();
 
             if (distance < 0) {
                 clearInterval(countdownInterval);
