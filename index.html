@@ -154,7 +154,7 @@
                 <div class="card p-8">
                     <h3 class="font-pacifico text-3xl text-pink-500 mb-4">My Dearest Love,</h3>
                     <p class="text-lg text-gray-700 leading-relaxed">
-                        I made this little website just for you. It's a small way to show you how much you mean to me. Every moment with you is my favorite moment. You make my world brighter and my heart fuller. Thank you for being my everything!
+                        I made this little website just for you. It's a small way to show you how much you mean to me. Every moment with you is my favorite moment. You make my world brighter and my heart fuller. Thank you for being you.
                         <br><br>
                         With all my love,
                         <br>
@@ -171,7 +171,7 @@
         // IMPORTANT: Change these values to personalize the website!
         const yourName = "Your Husband"; // Change to your name
         const gfName = "my favorite person"; // Change to your girlfriend's name
-        const anniversaryString = "2025-11-11T00:00:00"; // IMPORTANT: The date you started your relationship
+        const anniversaryString = "2024-11-11T00:00:00"; // I've updated the year to 2024!
 
         // --- DYNAMIC CONTENT SETUP ---
         document.getElementById('header-subtitle').innerText = `A little surprise for ${gfName}.`;
@@ -215,7 +215,7 @@
             let nextAnniversary = new Date(anniversaryDate);
             nextAnniversary.setFullYear(now.getFullYear());
 
-            // If the anniversary for this year has already passed (or is today), set it to next year
+            // If the anniversary for this year has already passed, set it to next year
             if (now >= nextAnniversary) {
                 nextAnniversary.setFullYear(now.getFullYear() + 1);
             }
